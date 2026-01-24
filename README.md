@@ -445,4 +445,4 @@ JOIN population ON nin.state = population.state;
 | 48.51                        |
 
 
-**Result**: 48.24% of Nigeria's projected population is enrolled in NIN.
+**Result**: 48.51% of Nigeria's projected population is enrolled in NIN.
