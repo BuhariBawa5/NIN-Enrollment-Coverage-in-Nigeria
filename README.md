@@ -203,6 +203,12 @@ LIMIT 10;
 | Delta     | 3292258         |
 | Jigawa    | 3169263         |
 
+### Visualization
+
+![Top 10 Best Performing States](https://github.com/BuhariBawa5/NIN-Enrollment-Coverage-in-Nigeria/blob/main/BestPerfomingStates.png)
+
+
+*Figure 1: States with highest NIN enrollment numbers*
 
 ## Top 10 Worst-Performing States
 ```sql
@@ -237,4 +243,168 @@ LIMIT 10;
 | Kwara       | 2051490         |
 | Imo         | 2076087         |
 
+### Visualization
+
+![Top 10 Best Performing States](https://github.com/BuhariBawa5/NIN-Enrollment-Coverage-in-Nigeria/blob/main/WorstPerformingStates.png)
+
+*Figure 2: States with lowest NIN enrollment numbers*
+
+---
+
+# Female Enrollment Analysis by State
+
+## Question
+What is the female enrollment percentage per state including diaspora?
+
+---
+
+### SQL Query
+```sql
+-- Calculate female enrollment percentage for all states including diaspora
+SELECT 
+    state,
+    ROUND((female * 100 / total_enrolment) AS female_percentage
+FROM nin
+WHERE total_enrolment > 0
+ORDER BY female_percentage DESC;
+```
+
+### Query Logic
+
+1. Select the state and calculate female enrollment percentage
+   - Divide `female` by `total_enrolment`
+   - Multiply by `100`
+2. Use `ROUND()`
+3. Alias the calculated column as `female_percentage`
+4. Filter out records with zero enrollment to prevent errors
+5. Order results by `female_percentage` in descending order
+
+---
+
+| state       | female_percentage |
+|-------------|-------------------|
+| Ekiti       | 50                |
+| Imo         | 49                |
+| Osun        | 49                |
+| Enugu       | 49                |
+| Ogun        | 48                |
+| Ondo        | 48                |
+| Oyo         | 48                |
+| Anambra     | 48                |
+| Plateau     | 47                |
+| Akwa_Ibom   | 47                |
+| Delta       | 47                |
+| Kogi        | 47                |
+| Ebonyi      | 46                |
+| Rivers      | 46                |
+| Kwara       | 46                |
+| Edo         | 46                |
+| Cross_River | 45                |
+| Lagos       | 45                |
+| Kaduna      | 45                |
+| Bayelsa     | 45                |
+| Borno       | 44                |
+| Benue       | 43                |
+| Nasarawa    | 43                |
+| Adamawa     | 42                |
+| Kano        | 42                |
+| FCT_Abuja   | 42                |
+| Katsina     | 41                |
+| Jigawa      | 41                |
+| Gombe       | 41                |
+| Taraba      | 40                |
+| Niger       | 39                |
+| Diaspora    | 38                |
+| Bauchi      | 38                |
+| Yobe        | 38                |
+| Abia        | 38                |
+| Kebbi       | 37                |
+| Zamfara     | 34                |
+| Sokoto      | 30                |
+
+---
+
+### Visualization
+
+![Female Enrolment](https://github.com/BuhariBawa5/NIN-Enrollment-Coverage-in-Nigeria/blob/main/FemaleGenderEnrolment.png)
+
+*Figure 3: Female Enrolment Analysis by State*
+
+---
+
+# NIN Enrollment vs Projected Population by State
+
+## Question
+What are the reported NIN total enrollment and projected population by state?
+
+---
+
+## SQL Query
+```sql
+-- Join NIN enrollment data with population projections
+SELECT 
+    nin.state,
+    nin.total_enrolment,
+    population.projected_population
+FROM nin
+INNER JOIN population
+    ON nin.state = population.state;
+```
+
+## Query Logic
+
+1. Use `INNER JOIN` to combine the `nin` and `population` tables
+2. Select `state` and `total_enrolment` from the `nin` table
+3. Select `projected_population` from the `population` table
+4. Join tables on the common column `state` (must match exactly in both tables)
+
+
+---
+
+## Assumptions
+
+- State names are **standardized and identical** across both tables
+
+---
+
+| state       | total_enrolment | projected_population |
+|-------------|-----------------|----------------------|
+| Abia        | 2687129         | 4455476              |
+| Adamawa     | 3084822         | 5261469              |
+| Akwa_Ibom   | 2198771         | 5544008              |
+| Anambra     | 2938507         | 6494179              |
+| Bauchi      | 3152658         | 8744857              |
+| Bayelsa     | 791563          | 2777147              |
+| Benue       | 2797666         | 6711965              |
+| Borno       | 3033228         | 6670081              |
+| Cross_River | 1412341         | 4841743              |
+| Delta       | 3292258         | 6155123              |
+| Ebonyi      | 1017938         | 3487378              |
+| Edo         | 2736211         | 5173551              |
+| Ekiti       | 1159542         | 3885438              |
+| Enugu       | 1992390         | 5098126              |
+| FCT_Abuja   | 3964966         | 3134005              |
+| Gombe       | 2114544         | 4202105              |
+| Imo         | 2076087         | 5992973              |
+| Jigawa      | 3169263         | 7861654              |
+| Kaduna      | 7159651         | 9653619              |
+| Kano        | 11079864        | 16529747             |
+| Katsina     | 4145660         | 10785592             |
+| Kebbi       | 2603512         | 5800334              |
+| Kogi        | 1930432         | 4817058              |
+| Kwara       | 2051490         | 3780152              |
+| Lagos       | 12904160        | 14812630             |
+| Nasarawa    | 2334584         | 3052590              |
+| Niger       | 3009588         | 7214009              |
+| Ogun        | 5063736         | 6894696              |
+| Ondo        | 2310102         | 5763336              |
+| Osun        | 2279758         | 4914080              |
+| Oyo         | 4667498         | 8712608              |
+| Plateau     | 2439265         | 5103781              |
+| Rivers      | 3619651         | 8158412              |
+| Sokoto      | 2707171         | 6799499              |
+| Taraba      | 1843475         | 3863965              |
+| Yobe        | 1925027         | 3940844              |
+| Zamfara     | 2181819         | 6167010              |
+| Diaspora    | 1528274         | 17000000             |
 
