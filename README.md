@@ -155,7 +155,86 @@ Analytical queries were executed in PostgreSQL to compute enrollment totals, gen
 
 # Key Analysis Questions
 
-- Which are the 10 best- and worst-performing states based on NIN enrollment coverage relative to projected population?
+- Which are the 10 best and worst performing states based on total nin enrolment?
 - How does female enrollment compare to total enrollment across states?
 - What proportion of each state's projected population has been enrolled for NIN, and where do significant coverage gaps or anomalies exist?
 - Which states exceed 100% coverage?
+
+# NIN Enrollment Coverage Analysis
+
+## Question
+Which are the 10 best- and worst-performing states based on total nin enrolment?
+
+
+---
+
+## Top 10 Best-Performing States
+```sql
+-- Retrieve the 10 states with highest NIN enrollment
+SELECT 
+    state,
+    total_enrolment
+FROM nin
+WHERE state <> 'Diaspora'
+ORDER BY total_enrolment DESC
+LIMIT 10;
+```
+
+**Query Logic:**
+1. Select state and enrollment columns
+2. Exclude 'Diaspora' records (non-state entity)
+3. Sort by enrollment in descending order
+4. Return top 10 results
+
+---
+
+### Results
+
+| state     | total_enrolment |
+|-----------|-----------------|
+| Lagos     | 12904160        |
+| Kano      | 11079864        |
+| Kaduna    | 7159651         |
+| Ogun      | 5063736         |
+| Oyo       | 4667498         |
+| Katsina   | 4145660         |
+| FCT_Abuja | 3964966         |
+| Rivers    | 3619651         |
+| Delta     | 3292258         |
+| Jigawa    | 3169263         |
+
+
+## Top 10 Worst-Performing States
+```sql
+-- Retrieve the 10 states with lowest NIN enrollment
+SELECT 
+    state,
+    total_enrolment
+FROM nin
+WHERE state <> 'Diaspora'
+ORDER BY total_enrolment ASC
+LIMIT 10;
+```
+
+**Query Logic:**
+1. Select state and enrollment columns
+2. Exclude 'Diaspora' records (non-state entity)
+3. Sort by enrollment in ascending order
+4. Return bottom 10 results
+
+### Results
+
+| state       | total_enrolment |
+|-------------|-----------------|
+| Bayelsa     | 791563          |
+| Ebonyi      | 1017938         |
+| Ekiti       | 1159542         |
+| Cross_River | 1412341         |
+| Taraba      | 1843475         |
+| Yobe        | 1925027         |
+| Kogi        | 1930432         |
+| Enugu       | 1992390         |
+| Kwara       | 2051490         |
+| Imo         | 2076087         |
+
+
