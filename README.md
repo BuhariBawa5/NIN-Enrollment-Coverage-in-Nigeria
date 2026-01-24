@@ -408,3 +408,41 @@ INNER JOIN population
 | Zamfara     | 2181819         | 6167010              |
 | Diaspora    | 1528274         | 17000000             |
 
+### Visualization
+
+![Nin Enrolment and Projected Population](https://github.com/BuhariBawa5/NIN-Enrollment-Coverage-in-Nigeria/blob/main/nin%20enrolment%20vs%20projected%20population.png)
+
+*Figure 5: NIN enrolment and Projected Population by State*
+
+# National NIN Coverage Percentage
+
+## Question
+What's the national coverage percentage?
+
+## Query Logic
+```sql
+SELECT 
+    ROUND((SUM(nin.total_enrolment)/ 
+           SUM(population.projected_population) * 100), 2) AS national_coverage_percentage
+FROM nin
+JOIN population ON nin.state = population.state;
+```
+
+## Tables
+**nin**: `state`, `female`, `male`, `total_enrolment`  
+**population**: `state`, `population`, `projected_population`
+
+## Steps
+
+1. **JOIN** - Connect `nin` and `population` tables on `state`
+2. **SUM enrollments** - Total all state enrollments
+3. **SUM population** - Total all projected populations
+4. **DIVIDE** - Calculate `(total_enrolment / projected_population) × 100`
+5. **ROUND** - Format result to 2 decimal places
+
+| national_coverage_percentage |
+|------------------------------|
+| 48.51                        |
+
+
+**Result**: 48.24% of Nigeria's projected population is enrolled in NIN.
