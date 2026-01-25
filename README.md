@@ -539,3 +539,36 @@ ON nin.state=population.state;
 - No other state surpasses 100%.  
 - Abia ranks second, with approximately 60% coverage.  
 - The Diaspora has the lowest coverage at 9%.
+
+
+# Anomaly Detection
+
+## FCT Abuja: Enrollment Exceeding Projected Population
+
+### Overview
+The Federal Capital Territory (FCT) Abuja shows a NIN enrollment coverage of **127%**, meaning total enrollments exceed the projected population by 27 percentage points. This is the only state-level entity in the dataset exhibiting this anomaly and requires detailed investigation.
+
+---
+
+### Potential Explanatory Factors
+
+#### 1. Internal Migration and Urbanization
+- **High In-Migration**: FCT Abuja is Nigeria's capital and experiences substantial internal migration from all 36 states
+- **Population Undercounting**: The base census may not have adequately captured rapid urbanization in the capital
+- **Commuter Population**: Many individuals work in Abuja but are enumerated as residents despite residing elsewhere officially
+
+#### 2. Administrative and Registration Patterns
+- **Federal Government Workers**: Large concentration of federal civil servants who may register in Abuja but maintain residence elsewhere
+- **Diplomatic and International Community**: Foreign nationals and diaspora returnees may register in FCT
+- **Multiple Registration Points**: Abuja hosts major NIMC enrollment centers, potentially attracting registrants from neighboring states
+
+#### 3. Data Quality Issues
+- **Address Reporting Bias**: People may list Abuja addresses even when resident elsewhere for perceived advantages
+- **Temporal Mismatch**: Enrollment data may be more current than population projections, which use 2.5% growth from an older census base
+
+#### 4. Population Projection Limitations
+- **Growth Rate Assumptions**: The 2.5% constant growth rate may underestimate FCT's actual explosive growth
+- **Migration Not Captured**: Standard demographic projections may not account for net internal migration to the capital
+- **Census Base Year Issues**: If the base census undercounted Abuja's population, projections compound this error
+
+---
