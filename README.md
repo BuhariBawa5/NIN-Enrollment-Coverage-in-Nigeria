@@ -529,6 +529,13 @@ ON nin.state=population.state;
 | Zamfara     | 35                     |
 | Diaspora    | 9                      |
 
+### Visualization
 
+![NIN enrolment coverage by state](https://github.com/BuhariBawa5/NIN-Enrollment-Coverage-in-Nigeria/blob/main/nin%20enrolment%20coverage%20percentage%20by%20state.png)
 
+### NIN Enrollment Coverage — Observation
 
+- The Federal Capital Territory (FCT_Abuja) has exceeded 100% enrollment coverage relative to its projected population.  
+- No other state surpasses 100%.  
+- Abia ranks second, with approximately 60% coverage.  
+- The Diaspora has the lowest coverage at 9%.
