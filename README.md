@@ -203,12 +203,20 @@ LIMIT 10;
 | Delta     | 3292258         |
 | Jigawa    | 3169263         |
 
+---
+
 ### Visualization
 
 ![Top 10 Best Performing States](https://github.com/BuhariBawa5/NIN-Enrollment-Coverage-in-Nigeria/blob/main/BestPerfomingStates.png)
 
 
 *Figure 1: States with highest NIN enrollment numbers*
+
+### Top 10 States by NIN Enrollment — Observation
+
+This result reflects absolute enrollment totals only and does not account for population size or coverage adequacy, which are examined in subsequent analyses.
+
+
 
 ## Top 10 Worst-Performing States
 ```sql
@@ -248,6 +256,9 @@ LIMIT 10;
 ![Top 10 Best Performing States](https://github.com/BuhariBawa5/NIN-Enrollment-Coverage-in-Nigeria/blob/main/WorstPerformingStates.png)
 
 *Figure 2: States with lowest NIN enrollment numbers*
+
+### Bottom 10 States by NIN Enrollment — Observation
+This ranking reflects the states with the lowest absolute NIN enrollment totals and does not account for population size or coverage adequacy, which are addressed in subsequent analyses.
 
 ---
 
@@ -329,6 +340,10 @@ ORDER BY female_percentage DESC;
 ![Female Enrolment](https://github.com/BuhariBawa5/NIN-Enrollment-Coverage-in-Nigeria/blob/main/FemaleGenderEnrolment.png)
 
 *Figure 3: Female Enrolment Analysis by State*
+
+### Female NIN Enrollment Distribution — Observation
+
+Female enrollment proportions exhibit limited variation across states, remaining below 50% in almost all cases except one state and concentrated primarily between 30% and 49%.
 
 ---
 
@@ -414,6 +429,11 @@ INNER JOIN population
 
 *Figure 5: NIN enrolment and Projected Population by State*
 
+### NIN enrolment and Projected Population — Observation
+
+The table juxtaposes absolute NIN enrollment counts with projected population estimates without normalization, serving as a reference point for later ratio-based assessments.
+
+
 # National NIN Coverage Percentage
 
 ## Question
@@ -444,5 +464,71 @@ JOIN population ON nin.state = population.state;
 |------------------------------|
 | 48.51                        |
 
+### National Coverage — Observation
 
-**Result**: 48.51% of Nigeria's projected population is enrolled in NIN.
+When aggregated nationally, total NIN enrolment accounts for 48.51% of the projected population, based on the estimates used in thus analysis
+
+---
+
+## Question
+How does NIN enrolment, expressed as a percentage of projected population, vary across states?
+
+## Query Logic
+```sql
+SELECT nin.state, ROUND ((nin.total_enrolment/population.projected_population)*100) AS nin_enrolment_coverage
+FROM NIN
+INNER JOIN population
+ON nin.state=population.state;
+```
+
+## Steps
+1. **SELECT state** - Get the state column from the NIN table
+2. **JOIN** - Connect `nin` and `population` tables on `state`
+3. **DIVIDE** - Calculate `(total_enrolment / projected_population) × 100`
+4. **ROUND** - Format result to nearest whole number
+5. **ALIAS** - Label the result as `nin_enrolment_coverage`
+
+| state       | nin_enrolment_coverage |
+|-------------|------------------------|
+| Abia        | 60                     |
+| Adamawa     | 59                     |
+| Akwa_Ibom   | 40                     |
+| Anambra     | 45                     |
+| Bauchi      | 36                     |
+| Bayelsa     | 29                     |
+| Benue       | 42                     |
+| Borno       | 45                     |
+| Cross_River | 29                     |
+| Delta       | 53                     |
+| Ebonyi      | 29                     |
+| Edo         | 53                     |
+| Ekiti       | 30                     |
+| Enugu       | 39                     |
+| FCT_Abuja   | 127                    |
+| Gombe       | 50                     |
+| Imo         | 35                     |
+| Jigawa      | 40                     |
+| Kaduna      | 74                     |
+| Kano        | 67                     |
+| Katsina     | 38                     |
+| Kebbi       | 45                     |
+| Kogi        | 40                     |
+| Kwara       | 54                     |
+| Lagos       | 87                     |
+| Nasarawa    | 76                     |
+| Niger       | 42                     |
+| Ogun        | 73                     |
+| Ondo        | 40                     |
+| Osun        | 46                     |
+| Oyo         | 54                     |
+| Plateau     | 48                     |
+| Rivers      | 44                     |
+| Sokoto      | 40                     |
+| Taraba      | 48                     |
+| Yobe        | 49                     |
+| Zamfara     | 35                     |
+| Diaspora    | 9                      |
+
+
+
+
